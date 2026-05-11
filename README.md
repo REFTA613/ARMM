@@ -57,7 +57,7 @@ cd ARMM
 
 Execute the main script:
 ```
-./setup.py
+./run.py
 ```
 
 The tool will automatically:
