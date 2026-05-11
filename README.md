@@ -4,11 +4,6 @@
 
 # Arma Reforger Mod Version Checker & Updater for LinuxGSM
 
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Python](https://img.shields.io/badge/python-3.6%2B-blue.svg)
-![Platform](https://img.shields.io/badge/platform-LinuxGSM-lightgrey.svg)
-
-# Arma Reforger Mod Version Checker & Updater for LinuxGSM
 
 A command-line utility designed specifically for LinuxGSM-managed Arma Reforger server instances.  
 This tool automates the process of checking workshop mod versions, comparing them against the latest releases, and safely updating the server configuration file.
