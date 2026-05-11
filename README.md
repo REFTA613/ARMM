@@ -40,11 +40,11 @@ git clone https://github.com/your-username/reforger-mod-updater.git
 ```
 3. Set executable permissions for the project directory.
 ```
-chmod 755 reforger-mod-updater
+chmod 755 ARMM
 ```
 4. Enter the project directory.
 ```
-cd reforger-mod-updater
+cd ARMM
 ```
 5. Run the setup script to initialize dependencies.
 ```
