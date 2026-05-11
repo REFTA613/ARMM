@@ -2,7 +2,7 @@
 ![Python](https://img.shields.io/badge/python-3.6%2B-blue.svg)
 ![Platform](https://img.shields.io/badge/platform-LinuxGSM-lightgrey.svg)
 
-# Arma Reforger Mod Version Checker & Updater for LinuxGSM
+# ARMM(Arma Reforger Mod Manager) for LinuxGSM
 
 
 A command-line utility designed specifically for LinuxGSM-managed Arma Reforger server instances.  
