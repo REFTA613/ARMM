@@ -3,7 +3,7 @@
 ![Platform](https://img.shields.io/badge/platform-LinuxGSM-lightgrey.svg)
 
 # ARMM 
-## (Arma Reforger Mod Manager) for LinuxGSM
+## Arma Reforger Mod Manager for LinuxGSM
 
 
 A command-line utility designed specifically for LinuxGSM-managed Arma Reforger server instances.  
