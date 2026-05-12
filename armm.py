@@ -125,12 +125,12 @@ def get_remote_version(session, mod_id):
 # VERSION CHECK
 # =====================
 
-def version(v):
-    try:
-        return tuple(map(int, str(v).split(".")))
-    except Exception:
-        return (0,)
-
+def version(v, parts=3):
+    nums = re.findall(r"\d+", str(v))
+    nums = [int(n) for n in nums[:parts]]
+    while len(nums) < parts:
+        nums.append(0)
+    return tuple(nums)
 
 def outdated(local, remote):
     return version(local) < version(remote)
