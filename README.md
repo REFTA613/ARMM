@@ -2,8 +2,75 @@
 ![Python](https://img.shields.io/badge/python-3.6%2B-blue.svg)
 ![Platform](https://img.shields.io/badge/platform-LinuxGSM-lightgrey.svg)
 
-# ARMM 
-## Arma Reforger Mod Manager for LinuxGSM
+ARMM – Arma Reforger Mod Manager for LinuxGSM
+
+ARMM is a plugin for LinuxGSM that automates the management and updating of mods for Arma Reforger dedicated servers.
+
+It is designed to remove the manual process of downloading, updating, and syncing mods, making server maintenance faster, safer, and less error-prone.
+
+🚀 What problem does it solve?
+
+Managing mods for Arma Reforger servers manually is often:
+
+slow and repetitive
+
+error-prone (missing files, wrong versions)
+
+hard to keep synchronized across servers
+
+ARMM solves this by automating the entire mod update workflow inside LinuxGSM.
+
+What it does
+
+ARMM integrates into LinuxGSM and provides tools to:
+
+Download and update Arma Reforger mods
+
+Synchronize mod versions with server configuration
+
+Clean outdated or unused mod files
+
+Ensure consistency between server and mod repository
+
+Key idea
+
+Instead of manually handling mod files, ARMM acts as an automation layer on top of LinuxGSM.
+
+“One command to keep your server mods up to date.”
+
+Tech / Environment
+
+LinuxGSM compatible environment
+
+Bash / scripting integration (or plugin system depending on implementation)
+
+Designed for dedicated Arma Reforger servers
+
+Why this project exists
+
+This tool was built to simplify real server administration workflows, especially for communities hosting Arma Reforger servers that rely on frequent mod updates.
+
+Future improvements
+
+Web dashboard for mod management
+
+Auto-detection of mod updates
+
+Multi-server synchronization support
+
+(Optional)
+
+Add screenshots or terminal output here showing:
+
+mod update process
+
+LinuxGSM integration
+
+before/after sync state
+
+
+
+
 
 
 A command-line utility designed specifically for LinuxGSM-managed Arma Reforger server instances.  
