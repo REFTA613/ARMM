@@ -104,7 +104,7 @@ This tool automates the process of checking workshop mod versions, comparing the
 
 2. Clone the repository into the main directory.
 ```
-git clone https://github.com/your-username/reforger-mod-updater.git
+git clone https://github.com/$user/reforger-mod-updater.git
 ```
 3. Set executable permissions for the project directory.
 ```
@@ -130,7 +130,7 @@ Execute the main script:
 The tool will automatically:
 
 - Load the default configuration file from  
-  `/home/armareforger1/serverfiles/armarserver_config.json`
+  `$user/serverfiles/armarserver_config.json`
 - Parse the `game.mods` array from the configuration
 - Query the official workshop for each installed mod ID
 - Compare local versions against remote versions
@@ -160,7 +160,7 @@ To use a custom configuration file, pass the absolute path as an argument:
 
 
 ## Author
-Fabio Clemente (REFTA)
+Fabio Clemente (REFTA613)
 
 ## License
 
