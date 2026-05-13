@@ -104,7 +104,7 @@ This tool automates the process of checking workshop mod versions, comparing the
 
 2. Clone the repository into the main directory.
 ```
-git clone https://github.com/$user/reforger-mod-updater.git
+git clone https://github.com/$user/ARMM.git
 ```
 3. Set executable permissions for the project directory.
 ```
