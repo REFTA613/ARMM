@@ -1,169 +1,149 @@
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Python](https://img.shields.io/badge/python-3.6%2B-blue.svg)
-![Platform](https://img.shields.io/badge/platform-LinuxGSM-lightgrey.svg)
+ARMM — Arma Reforger Mod Version Manager
 
-### ARMM – Arma Reforger Mod Manager for LinuxGSM
+ARMM is a Python command-line utility for checking Arma Reforger Workshop mod versions against the versions recorded in a LinuxGSM server configuration.
 
-ARMM is a plugin for LinuxGSM that automates the management and updating of mods for Arma Reforger dedicated servers.
+It helps server administrators identify outdated mod version entries and update the configuration after reviewing the proposed changes.
 
-It is designed to remove the manual process of downloading, updating, and syncing mods, making server maintenance faster, safer, and less error-prone.
+Features
 
-## What problem does it solve?
+- Workshop version checks: queries the public Arma Reforger Workshop for the current version of each configured mod.
+- Version comparison: compares configured versions with the versions retrieved from the Workshop.
+- Interactive updates: displays proposed changes and asks for confirmation before modifying the configuration.
+- Automatic backup: creates a backup of the configuration before writing changes.
+- Custom configuration path: accepts an alternative JSON configuration file as a command-line argument.
+- Request handling: uses HTTP timeouts, limited retries and delays between Workshop requests.
+- Error reporting: reports mods that cannot be found or whose versions cannot be retrieved.
 
-Managing mods for Arma Reforger servers manually is often:
+How it works
 
-slow and repetitive
+1. ARMM reads the server configuration JSON file.
+2. It identifies the configured mod IDs and their recorded versions.
+3. It queries the Arma Reforger Workshop for the current version of each mod.
+4. It reports version differences and mods whose versions could not be retrieved.
+5. If updates are available, it asks for confirmation.
+6. After confirmation, it creates a backup and updates the corresponding version values in the configuration file.
 
-error-prone (missing files, wrong versions)
+Important: ARMM updates version entries in the configuration file. It does not download or install mod files, remove outdated mod files, restart the server, or verify that updated mods work correctly in-game.
 
-hard to keep synchronized across servers
+Requirements
 
-ARMM solves this by automating the entire mod update workflow inside LinuxGSM.
+- Linux environment.
+- Python 3 with the "venv" module available.
+- Network access to the public Arma Reforger Workshop.
+- A valid JSON configuration file containing the server's mod entries.
+- Read and write permissions for the configuration file and its directory.
 
-## What it does
+The server configuration is expected to use a supported mod-list structure, such as "game.mods" or a root-level "mods" array.
 
-ARMM integrates into LinuxGSM and provides tools to:
+Installation
 
-Download and update Arma Reforger mods
+Clone the repository and enter the project directory:
 
-Synchronize mod versions with server configuration
-
-Clean outdated or unused mod files
-
-Ensure consistency between server and mod repository
-
-Key idea
-
-Instead of manually handling mod files, ARMM acts as an automation layer on top of LinuxGSM.
-
-“One command to keep your server mods up to date.”
-
-## Tech / Environment
-
-LinuxGSM compatible environment
-
-Bash / scripting integration (or plugin system depending on implementation)
-
-Designed for dedicated Arma Reforger servers
-
-## Why this project exists
-
-This tool was built to simplify real server administration workflows, especially for communities hosting Arma Reforger servers that rely on frequent mod updates.
-
-Future improvements
-
-Web dashboard for mod management
-
-Auto-detection of mod updates
-
-Multi-server synchronization support
-
-(Optional)
-
-Add screenshots or terminal output here showing:
-
-mod update process
-
-LinuxGSM integration
-
-before/after sync state
-
-
-
-
-
-
-A command-line utility designed specifically for LinuxGSM-managed Arma Reforger server instances.  
-This tool automates the process of checking workshop mod versions, comparing them against the latest releases, and safely updating the server configuration file.
-
----
-
-## Features
-
-- Automated version comparison against the official Arma Reforger Workshop  
-- Safe configuration updates with automatic backup creation  
-- Native support for LinuxGSM directory structure and `game.mods` configuration format  
-- Built-in rate limiting and HTTP session management to prevent API throttling  
-- Command-line argument support for custom configuration paths  
-- Graceful handling of unpublished, removed, or temporarily unavailable mods  
-
----
-
-## Prerequisites
-
-- Linux environment running an Arma Reforger server via LinuxGSM  
-- Python 3.6 or higher  
-- Python `requests` library  
-- Active network connectivity to `reforger.armaplatform.com`  
-
----
-
-## Installation
-
-1. Navigate to your main user directory.
-
-2. Clone the repository into the main directory.
-```
-git clone https://github.com/$user/ARMM.git
-```
-3. Set executable permissions for the project directory.
-```
-chmod 755 ARMM
-```
-4. Enter the project directory.
-```
+git clone https://github.com/REFTA613/ARMM.git
 cd ARMM
-```
-5. Run the setup script to initialize dependencies.
-```
-./setup.py
-```
----
 
-## Usage
+Create the virtual environment and install the Python dependencies:
 
-Execute the main script:
-```
-./run.py
-```
+bash setup.sh
 
-The tool will automatically:
+The setup script creates a local virtual environment named "venv" and installs the dependencies listed in "requirements.txt".
 
-- Load the default configuration file from  
-  `$user/serverfiles/armarserver_config.json`
-- Parse the `game.mods` array from the configuration
-- Query the official workshop for each installed mod ID
-- Compare local versions against remote versions
-- Display a summary of outdated or unreachable mods
-- Prompt for confirmation before modifying the configuration
-- Generate a `.backup` file and apply updates upon approval
+The current dependency list includes "requests".
 
----
+Usage
 
-### Custom configuration file
+Use the default configuration path
 
-To use a custom configuration file, pass the absolute path as an argument:
+Run:
 
+bash run.sh
 
----
+By default, ARMM looks for the following configuration file:
 
-## Technical Notes
+/home/armareforger1/serverfiles/armarserver_config.json
 
-- The utility queries public workshop pages directly. No private API credentials are required.  
-- Mods marked as unreachable are typically unpublished, removed, or temporarily offline on the workshop.  
-- Version comparison follows standard semantic versioning logic. Non-standard version strings are handled without interrupting execution.  
-- Network requests include controlled delays to comply with workshop rate limits and prevent connection throttling.  
-- A configuration backup is generated in the same directory before any modifications are written. Retain backup files for manual rollback if required.  
-- Always verify server stability after applying mod version updates.  
+This default path is specific to the current implementation. If your LinuxGSM installation uses a different account or directory, provide the correct path explicitly.
 
----
+Specify a custom configuration file
 
+Pass the absolute path to the JSON configuration file:
 
-## Author
-Fabio Clemente (REFTA613)
+bash run.sh /absolute/path/to/armarserver_config.json
 
-## License
+For paths containing spaces, use quotes:
 
-This project is licensed under the MIT License.
+bash run.sh "/path/to/my server/armarserver_config.json"
 
-See the [LICENSE](LICENSE) file for details.
+Review proposed changes
+
+When outdated versions are detected, ARMM displays the configured and retrieved versions and asks:
+
+Update config file with new versions? (yes/no):
+
+Enter "yes" to proceed. Any other response aborts the update.
+
+Review the proposed changes carefully before confirming.
+
+Backups and recovery
+
+Before writing changes, ARMM creates a backup alongside the configuration file.
+
+For example:
+
+armarserver_config.json
+armarserver_config.json.backup
+
+If an error occurs while writing the updated configuration, the program attempts to restore the backup automatically.
+
+For manual recovery, stop any process that might modify the same configuration file, then restore the backup using your preferred file-management procedure.
+
+Backup warning: the current implementation uses a fixed ".backup" filename. A subsequent update can overwrite an existing backup. Preserve any backup you need to keep before running another update.
+
+Version checks and limitations
+
+- Workshop lookups depend on the availability and structure of the public Workshop pages.
+- A failed lookup does not necessarily mean that a mod has been deleted; it may be temporarily unavailable or inaccessible.
+- Version comparison extracts numeric components and compares up to three components. It is not a complete implementation of semantic versioning.
+- The tool updates configuration version values; it does not download, install, or validate mod content.
+- The current implementation supports specific JSON mod-list structures. Other configuration formats may require code changes.
+- Configuration updates should be followed by appropriate server checks before returning the server to normal operation.
+
+Troubleshooting
+
+The configuration file cannot be opened
+
+Verify the path and ensure the user running ARMM has permission to read the file.
+
+Python dependencies are missing
+
+Run the setup script again:
+
+bash setup.sh
+
+Ensure Python 3 and its virtual-environment support are installed.
+
+A mod cannot be resolved
+
+Check the mod ID and its availability on the official Workshop. Retry later if the service is temporarily unavailable.
+
+The configuration does not contain a recognized mod list
+
+Verify that the JSON file contains a supported mod-list structure and that it is valid JSON.
+
+Project structure
+
+ARMM/
+├── armm.py
+├── requirements.txt
+├── run.sh
+├── setup.sh
+├── README.md
+└── LICENSE
+
+License
+
+ARMM is distributed under the MIT License. See "LICENSE" (LICENSE) for details.
+
+Author
+
+Fabio Clemente — "REFTA613" (https://github.com/REFTA613)
